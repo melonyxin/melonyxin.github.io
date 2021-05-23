@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>求生之路开服过程（基于ubuntu） | Melony</title><meta name="keywords" content="Ubuntu,求生之路2"><meta name="author" content="Melony"><meta name="copyright" content="Melony"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="腾讯云、华为云应测配置：  CPU 1核 内存 2GB 带宽 1M 硬盘 40g 系统 ubuntu 16.04 64位  服务器安装流程安装32位环境64位系统需要安装32位环境 1sudo apt-get install lib32gcc1  安装steamcmd通过steamcmd安装 l4d2 服务器框架  创建存储目录 -&gt; mkdir 指令1mkdir ~&#x2F;steamcmd 进入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="求生之路开服过程（基于ubuntu）">
+<meta property="og:url" content="https://melonyxin.github.io/posts/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D/index.html">
+<meta property="og:site_name" content="Melony">
+<meta property="og:description" content="腾讯云、华为云应测配置：  CPU 1核 内存 2GB 带宽 1M 硬盘 40g 系统 ubuntu 16.04 64位  服务器安装流程安装32位环境64位系统需要安装32位环境 1sudo apt-get install lib32gcc1  安装steamcmd通过steamcmd安装 l4d2 服务器框架  创建存储目录 -&gt; mkdir 指令1mkdir ~&#x2F;steamcmd 进入">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://melonyxin.github.io/img/cover/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D.jpg">
+<meta property="article:published_time" content="2019-05-01T18:48:21.000Z">
+<meta property="article:modified_time" content="2021-05-23T07:49:16.896Z">
+<meta property="article:author" content="Melony">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="求生之路2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://melonyxin.github.io/img/cover/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D.jpg"><link rel="shortcut icon" href="/img/index/favicon.png"><link rel="canonical" href="https://melonyxin.github.io/posts/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '求生之路开服过程（基于ubuntu）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-23 15:49:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/index/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Melony</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">求生之路开服过程（基于ubuntu）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-05-01T18:48:21.000Z" title="发表于 2019-05-02 02:48:21">2019-05-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-23T07:49:16.896Z" title="更新于 2021-05-23 15:49:16">2021-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Ubuntu/">Ubuntu</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">549</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="求生之路开服过程（基于ubuntu）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>腾讯云、华为云应测<br>配置：</p>
+<ul>
+<li>CPU 1核</li>
+<li>内存 2GB</li>
+<li>带宽 1M</li>
+<li>硬盘 40g</li>
+<li>系统 ubuntu 16.04 64位</li>
+</ul>
+<h3 id="服务器安装流程"><a href="#服务器安装流程" class="headerlink" title="服务器安装流程"></a>服务器安装流程</h3><h4 id="安装32位环境"><a href="#安装32位环境" class="headerlink" title="安装32位环境"></a>安装32位环境</h4><p><strong>64位系统需要安装32位环境</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install lib32gcc1</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装steamcmd"><a href="#安装steamcmd" class="headerlink" title="安装steamcmd"></a>安装steamcmd</h4><p><strong>通过steamcmd安装 l4d2 服务器框架</strong></p>
+<ul>
+<li>创建存储目录 -&gt; mkdir 指令<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/steamcmd</span><br></pre></td></tr></table></figure></li>
+<li>进入目录 -&gt; cd 指令<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/steamcmd</span><br></pre></td></tr></table></figure></li>
+<li>下载 steamcmd包<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>解压<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>打开steam<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./steamcmd.sh</span><br></pre></td></tr></table></figure>
+这时启动成功会出现：<br><code>Steam&gt;</code></li>
+</ul>
+<h4 id="L4D2-服务器框架"><a href="#L4D2-服务器框架" class="headerlink" title="L4D2 服务器框架"></a>L4D2 服务器框架</h4><ul>
+<li><p>匿名登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;login anonymous</span><br></pre></td></tr></table></figure></li>
+<li><p>指定下载目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;force_install_dir /root/l4d2</span><br></pre></td></tr></table></figure>
+<p>这是我华为云下设置的目录，自己根据自己情况而定</p>
+</li>
+<li><p>下载服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;app_update 222860 validate</span><br></pre></td></tr></table></figure>
+<p>若以后服务器提示更新，也是这条语句更新</p>
+</li>
+<li><p>下载成功<br>下载成功会提示这条语句<br><code>Success! App &#39;222860&#39; fully installed.</code><br>然后退出steamcmd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;quit</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="配置L4D2服务器"><a href="#配置L4D2服务器" class="headerlink" title="配置L4D2服务器"></a>配置L4D2服务器</h4><ul>
+<li>新建配置文件<br>进入目录：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /root/l4d2/left4dead2/cfg/</span><br></pre></td></tr></table></figure>
+创建配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi server.cfg</span><br></pre></td></tr></table></figure></li>
+<li>填写配置内容<br>最最最简洁版：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostname &quot;xxx&quot;     //游戏服务器名</span><br><span class="line">sv_steamgroup &quot;xxx&quot;  //Steam组号</span><br><span class="line">sv_steamgroup_exclusive 1 //将服务器设为Steam组私有</span><br></pre></td></tr></table></figure></li>
+<li>服务器标题栏<br>于<code>l4d2/left4dead2/host.txt</code>中,可填文字和网址</li>
+<li>服务器公告栏<br>于<code>l4d2/left4dead2/motd.txt</code>中，推荐放入网址</li>
+</ul>
+<h4 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/l4d2</span><br><span class="line">./srcds_run -game left4dead2 +exec server.cfg</span><br></pre></td></tr></table></figure>
+<p>默认端口为27015，需要服务器开放此端口，也可自己设置为其它端口<br>这样启动，在ssh窗口关闭后，服务器就关闭了，我们需要借助screen 后台运行</p>
+<ul>
+<li>创建一个脚本<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch start.sh</span><br></pre></td></tr></table></figure></li>
+<li>打开脚本<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi start,sh</span><br></pre></td></tr></table></figure></li>
+<li>填入启动指令<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen ./srcds_run -game left4dead2 +exec server.cfg +map xxx</span><br></pre></td></tr></table></figure></li>
+<li>赋予脚本执行权力<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/root/l4d2/start.sh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>就可以启动服务器了<br><code>./start.sh</code>就会打开screen面板启动服务器</p>
+<ul>
+<li>切出面板 Ctrl+A Ctrl+D（服务器不会关闭，在后台运行）</li>
+<li>切回面板 <code>screen -r</code></li>
+<li>关闭服务器 Ctrl+C</li>
+</ul>
+<p><strong>切换地图，使用第三方地图</strong></p>
+<ul>
+<li>把第三方地图放在<code>l4d2/left4dead2/addons</code>文件夹下</li>
+<li>修改启动指令 <code>... +map xxx</code></li>
+<li>重新启动</li>
+</ul>
+<hr>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Melony</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://melonyxin.github.io/posts/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D/">https://melonyxin.github.io/posts/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://melonyxin.github.io" target="_blank">Melony</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ubuntu/">Ubuntu</a><a class="post-meta__tags" href="/tags/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2/">求生之路2</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/Ubuntu%E6%8C%87%E4%BB%A4/"><img class="prev-cover" src="/img/cover/Ubuntu%E6%8C%87%E4%BB%A4.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Ubuntu 常用指令</div></div></a></div><div class="next-post pull-right"><a href="/posts/2018%EF%BC%8C%E5%86%8D%E8%A7%81%EF%BC%81/"><img class="next-cover" src="/img/cover/2018%EF%BC%8C%E5%86%8D%E8%A7%81%EF%BC%81.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2018，再见！</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/Ubuntu指令/" title="Ubuntu 常用指令"><img class="cover" src="/img/cover/Ubuntu%E6%8C%87%E4%BB%A4.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-05-02</div><div class="title">Ubuntu 常用指令</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/index/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Melony</div><div class="author-info__description">读读书，记录学习点点滴滴</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" href="javascript:alert(&quot;按 CTRL+ D 键将本页加入书签&quot;);"><i class="fa fa-bookmark"></i><span>加入书签</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/melonyxin" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:13020030963@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_31555445" target="_blank" title="CSDN"><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Hello~~ ^_^</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">服务器安装流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%8532%E4%BD%8D%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">安装32位环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85steamcmd"><span class="toc-number">1.2.</span> <span class="toc-text">安装steamcmd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L4D2-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">1.3.</span> <span class="toc-text">L4D2 服务器框架</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEL4D2%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">配置L4D2服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.5.</span> <span class="toc-text">启动服务器</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/JS-%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%B8%89%E4%B8%AA%E6%96%B9%E6%B3%95/" title="JS-事件绑定的三个方法"><img src="/img/cover/JS-%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%B8%89%E4%B8%AA%E6%96%B9%E6%B3%95.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS-事件绑定的三个方法"/></a><div class="content"><a class="title" href="/posts/JS-%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%B8%89%E4%B8%AA%E6%96%B9%E6%B3%95/" title="JS-事件绑定的三个方法">JS-事件绑定的三个方法</a><time datetime="2020-04-21T07:26:40.000Z" title="发表于 2020-04-21 15:26:40">2020-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81/" title="hexo buttferfly网站添加网站验证"><img src="/img/cover/%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo buttferfly网站添加网站验证"/></a><div class="content"><a class="title" href="/posts/%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81/" title="hexo buttferfly网站添加网站验证">hexo buttferfly网站添加网站验证</a><time datetime="2020-04-16T09:40:26.000Z" title="发表于 2020-04-16 17:40:26">2020-04-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/%E4%B8%83%E6%9C%88%E8%AE%B0/" title="七月记"><img src="/img/cover/%E4%B8%83%E6%9C%88%E8%AE%B0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="七月记"/></a><div class="content"><a class="title" href="/posts/%E4%B8%83%E6%9C%88%E8%AE%B0/" title="七月记">七月记</a><time datetime="2019-07-01T15:11:11.000Z" title="发表于 2019-07-01 23:11:11">2019-07-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/%E3%80%8A%E7%83%A6%E6%81%BC%E4%BA%BA%E7%94%9F%E3%80%8B%E5%90%8E%E4%B8%80%E4%BA%9B%E5%9B%9E%E5%BF%86/" title="《烦恼人生》后一些回忆"><img src="/img/cover/%E3%80%8A%E7%83%A6%E6%81%BC%E4%BA%BA%E7%94%9F%E3%80%8B%E5%90%8E%E4%B8%80%E4%BA%9B%E5%9B%9E%E5%BF%86.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《烦恼人生》后一些回忆"/></a><div class="content"><a class="title" href="/posts/%E3%80%8A%E7%83%A6%E6%81%BC%E4%BA%BA%E7%94%9F%E3%80%8B%E5%90%8E%E4%B8%80%E4%BA%9B%E5%9B%9E%E5%BF%86/" title="《烦恼人生》后一些回忆">《烦恼人生》后一些回忆</a><time datetime="2019-05-09T11:26:20.000Z" title="发表于 2019-05-09 19:26:20">2019-05-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/%E7%9C%A8%E7%9C%BC%E8%BF%87%E4%BA%86%E5%9B%9B%E6%9C%88%E5%A4%A9/" title="眨眼过了四月天"><img src="/img/cover/%E7%9C%A8%E7%9C%BC%E8%BF%87%E4%BA%86%E5%9B%9B%E6%9C%88%E5%A4%A9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="眨眼过了四月天"/></a><div class="content"><a class="title" href="/posts/%E7%9C%A8%E7%9C%BC%E8%BF%87%E4%BA%86%E5%9B%9B%E6%9C%88%E5%A4%A9/" title="眨眼过了四月天">眨眼过了四月天</a><time datetime="2019-05-03T11:56:26.000Z" title="发表于 2019-05-03 19:56:26">2019-05-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Melony</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
