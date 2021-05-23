@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>JS-事件绑定的三个方法</title>
+      <link href="posts/JS-%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%B8%89%E4%B8%AA%E6%96%B9%E6%B3%95/"/>
+      <url>posts/JS-%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E4%B8%89%E4%B8%AA%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>在网页中会有许多动画、按钮用来与用户进行交互响应。这个时候就常常需要遇到事件处理。事件绑定就是通过JavaScript监听到相应事件从而执行一些动作。</p><p>这篇文章记录一下关于JavaScript中事件绑定的三个方法和一些细节区别。</p><p>1、HTML标签中指定</p><p>2、JavaScript指定</p><p>3、addEventListener()</p><h3 id="HTML标签指定"><a href="#HTML标签指定" class="headerlink" title="HTML标签指定"></a>HTML标签指定</h3><p>通过HTML标签的<code>onclick</code>、<code>onmousedown</code>等这些属性进行绑定。</p><p>优点：绑定关系直观清晰</p><p>缺点：HTML与JavaScript代码应该分离，代码才更容易维护</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;handler()&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">&#x27;hello world&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="JavaScript指定"><a href="#JavaScript指定" class="headerlink" title="JavaScript指定"></a>JavaScript指定</h3><p>在JavaScript中获取到对应元素，通过元素的<code>onclick</code>、<code>onmousedown</code>这些属性赋值进行绑定。</p><p>优点：HTML与JavaScript代码分离，代码容易维护、整洁</p><p>缺点：不能绑定多个响应函数</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#btn&#x27;</span>).onclick=handler</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">&#x27;hello world&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener()"></a>addEventListener()</h3><p>通过元素的addEventListener()方法进行绑定可以解决不能绑定多个函数的问题。addEventListener方法一共有三个参数，如下：</p><p>1、event，字符串，指定时间名，如“click”</p><p>2、function，事件触发的响应函数</p><p>3、useCapture，可选。布尔值，指定事件是否在捕获或冒泡阶段执行。</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#btn&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,hello)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#btn&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,world)</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">&#x27;hello&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">world</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">&#x27;world&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Javasript学习点滴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> HTML </tag>
+            
+            <tag> 事件绑定 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo buttferfly网站添加网站验证</title>
+      <link href="posts/%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81/"/>
+      <url>posts/%E7%BD%91%E7%AB%99%E9%AA%8C%E8%AF%81/</url>
+      
+        <content type="html"><![CDATA[<p>本网站框架是基于<a href="https://hexo.io/">hexo</a></p><p>主题：<a href="https://github.com/jerryc127/hexo-theme-butterfly">butter-fly</a>   </p><p>主题作者：<a href="https://jerryc.me/">JerryC</a></p><p>我所使用的主题版本是2.0.0，目前已有更新的版本了，更多了解可以关注其作者<a href="https://jerryc.me/">JerryC</a>的博客</p><h2 id="进入主题"><a href="#进入主题" class="headerlink" title="进入主题"></a>进入主题</h2><p>网站验证主要就是为了让各大搜索引擎搜录我们的网站，这样可以让更多的人通过搜索引擎找到我们的网站，给我们的网站带来更多的流量。</p><p>这篇文章主要用于记录我将自己的网站通过<a href="https://www.google.com/webmasters/">谷歌</a>、<a href="https://www.bing.com/webmaster/">必应</a>、<a href="https://ziyuan.baidu.com/site/">百度</a>的网络验证。分别要到其对面网站注册验证。网址地址已经放在超链接中。关于其它搜索引擎大致也差不多，各位可以自己查询。</p><h2 id="谷歌验证（html标记验证）"><a href="#谷歌验证（html标记验证）" class="headerlink" title="谷歌验证（html标记验证）"></a>谷歌验证（html标记验证）</h2><h3 id="1、登录到系统中，输入自己的网站"><a href="#1、登录到系统中，输入自己的网站" class="headerlink" title="1、登录到系统中，输入自己的网站"></a>1、登录到系统中，输入自己的网站</h3><p>我选择的是第二个，第一个与第二个的区别是什么我也不太清楚的。输入自己网址，提示最好输入www的网址，主要还是看你自己。这有什么区别我也不太明白。</p><p><img src="/img/%E7%BD%91%E7%BB%9C%E9%AA%8C%E8%AF%81/google_1.jpg" alt="添加网址"></p><h3 id="2、选择验证方式"><a href="#2、选择验证方式" class="headerlink" title="2、选择验证方式"></a>2、选择验证方式</h3><p>一般主要选择<strong>文件验证</strong>或者是<strong>html标记</strong>。</p><p>我用文件的方式不知道为什么一直失败，可能是因为文件是html类型，而我这里加载html文件会默认当作文章加载导致了失败。我这里选择了<strong>html标记</strong>的方式。</p><p>将&lt;meta ….&gt;复制到<head>里面就好了。</p><p><img src="/img/%E7%BD%91%E7%BB%9C%E9%AA%8C%E8%AF%81/google_2.jpg" alt="html标记验证"></p><h3 id="3、添加代码到head"><a href="#3、添加代码到head" class="headerlink" title="3、添加代码到head"></a>3、添加代码到head</h3><p>在主题buttfer的配置文件_config.yml中有关于网络验证部分的配置。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">####    站長驗證    ####</span><br><span class="line"># Google Webmaster tools verification setting</span><br><span class="line"># See: https://www.google.com/webmasters/</span><br><span class="line">google_site_verification:</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>只需要将meta中的content的字段填在这里就可以了。</p><p>但是我的这个不知道为什么不行，会报一些我看不懂的错误。我不知道是不是我版本的问题还是我项目的问题。但是我又懒得升级版本，那就直接改好了。</p><p>直接在<code>themes\Butterfly\layout\includes\head.pug</code>添加相关的meta</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 谷歌的html标记</span><br><span class="line">meta(name=&quot;google-site-verification&quot; content=&quot;填入相应码&quot;)</span><br><span class="line">// 百度的html标记</span><br><span class="line">meta(name=&quot;baidu-site-verification&quot; content=&quot;填入相应码&quot;)</span><br></pre></td></tr></table></figure><h3 id="4、验证是否成功"><a href="#4、验证是否成功" class="headerlink" title="4、验证是否成功"></a>4、验证是否成功</h3><p>打开浏览器来到你的网站，查看源代码，在<head></head>中查看是否有你添加<meta></p><p><img src="/img/%E7%BD%91%E7%BB%9C%E9%AA%8C%E8%AF%81/google_3.jpg" alt="html标记"></p><p>出现了基本就成功，然后返回到谷歌，点击验证就可以了！</p><h2 id="必应验证（文件验证）"><a href="#必应验证（文件验证）" class="headerlink" title="必应验证（文件验证）"></a>必应验证（文件验证）</h2><h3 id="1、到必应系统，添加在自己的网站"><a href="#1、到必应系统，添加在自己的网站" class="headerlink" title="1、到必应系统，添加在自己的网站"></a>1、到必应系统，添加在自己的网站</h3><p>跟添加谷歌的步骤类似，其实基本都是一样的。</p><p><img src="/img/%E7%BD%91%E7%BB%9C%E9%AA%8C%E8%AF%81/biying_1.jpg" alt="添加网站"></p><h3 id="2、选择验证方式–文件验证"><a href="#2、选择验证方式–文件验证" class="headerlink" title="2、选择验证方式–文件验证"></a>2、选择验证方式–文件验证</h3><p>在谷歌验证的时候选择了<strong>html标记</strong>验证，这里讲一下文件验证的过程。</p><p>直接根据提示，下载对应文件。</p><p><img src="/img/%E7%BD%91%E7%BB%9C%E9%AA%8C%E8%AF%81/biying_2.jpg" alt="文件验证"></p><h3 id="3、添加文件到网站中"><a href="#3、添加文件到网站中" class="headerlink" title="3、添加文件到网站中"></a>3、添加文件到网站中</h3><p>这里，只要让对应的地址能够访问到下载的文件就可以了。</p><p>这里我们直接把<code>BingSiteAuth.xml</code>放在<code>source</code>文件中就可以了。部署网站。</p><p>我们在访问对应网址，能够正常打开就基本没问题了。点击验证即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> buttferfly </tag>
+            
+            <tag> 网站验证 </tag>
+            
+            <tag> 搜索引擎 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>七月记</title>
+      <link href="posts/%E4%B8%83%E6%9C%88%E8%AE%B0/"/>
+      <url>posts/%E4%B8%83%E6%9C%88%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p><em><strong>七</strong></em>  月，我还是回来了，这座小城，但仅仅装着寥寥无几的几个我认识的人。我原本热爱着的、幸福着的小城，显得有点空荡荡的，想找个人玩都还挺困难的。这或许会让我思考更多的东西，也不能说是一种颓废，颓废的不是在哪里做着什么，而是一种心态。而我想要让自己至少自己能够心安。</p><p><em><strong>于</strong></em>  是我想着做一些有意义的事。虽然很多东西，我都还胆怯着，但是人总归是要长大的，长大意味着什么，我想意味着很多很多，但其中有一味便是孤独吧。我的生活不能再是一个正午的懒觉，下午躺尸玩手机，吃完晚饭也是如此。这好像有些逃避成人世界了。</p><p><em><strong>成</strong></em>  长究竟是什么，为什么一路上走来的朋友总归分分合合，而对于老朋友分则更多，而新朋友又逐渐难以达到一些特别的位置，这或许是孤独的由来。我们不过是在追逐着同一个东西，无非是年少有为，但又好像不是同一个东西，我们因此才会分离，各自追逐着各自的远方。不能像小孩子一样，撒娇、逃避。“因为我们要做一个不动声色的大人了，不能哭，不能闹、不能情绪化”。近来，很喜欢这句话，可能有所感触，很难明确地解释。</p><p><em><strong>总</strong></em>  之，回到家还是好的，能陪陪父母、陪陪爷爷奶奶，不过也找点事做。</p><ul><li>学好车</li><li>做一款独立游戏</li><li>学会制作奶茶</li><li>学会制作冰淇淋</li><li>打一份暑假工，赚到3000</li></ul><p><em><strong>先</strong></em>  这样吧，七月小城很柔很静谧，且孤独。</p><hr><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活调料 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 家乡 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>《烦恼人生》后一些回忆</title>
+      <link href="posts/%E3%80%8A%E7%83%A6%E6%81%BC%E4%BA%BA%E7%94%9F%E3%80%8B%E5%90%8E%E4%B8%80%E4%BA%9B%E5%9B%9E%E5%BF%86/"/>
+      <url>posts/%E3%80%8A%E7%83%A6%E6%81%BC%E4%BA%BA%E7%94%9F%E3%80%8B%E5%90%8E%E4%B8%80%E4%BA%9B%E5%9B%9E%E5%BF%86/</url>
+      
+        <content type="html"><![CDATA[<p><em><strong>这</strong></em>  周阅读的小说是《烦恼人生》，很短，很有意思。整篇文章稍带压抑。这一天里，所有不好的事都在印家厚身上发生了，可能带有一点小说的戏剧性把。但也并不过分，生活时常就是这样，谁也不知道明天会有多少不如意的事情发生。我个人还是蛮欣赏印家厚的为人、性格的，在面对生活这么大的压力下，在各个事情所作出的行为，我觉得都没有都还算比较得当。课上有种声音是他太窝囊，不懂反抗。其实我觉得这并非窝囊，而是有一种担当，对于家庭的担当，还有会隐忍。在老师课上，对于很多情况下，我突然觉得自己其实也没有更好的做法。这或许就体现出生活压力所迫的无奈。但是何为生活压力呢？没房没有钱？又或者是什么？我可能还不太懂，我或许还可以说态度不同，生活压力就不同。但我好像并不太敢说出来，因为我还并没有完全的经济独立，我也就并不体会到那种生活压力到底是什么？不过这倒让我回忆起以往一些事，也让我有了记录下来的想法。</p><p><em><strong>隐</strong></em>  忍，这到底是个意味的词语，窝囊？隐忍的目的又是为了什么呢？是不是隐忍了之后一定就能够有天出人头地呢？这都是我还没有想明白的。我回忆起以前高中的一个事。我在自习课上念了一遍题目，然后我同桌开玩笑地告诉了纪律委员，又恰巧纪律委员搞忘擦掉，在班会上说出，我z自习课上自言自语。受到班主任的严厉批评，并且惩罚坐在门口一周。这让我很委屈，我同桌下课立马就告诉班主任真相，然后班主任就把我叫过去，但是并没有撤销处罚，反而跟我说的是，你是男生，要大度一点，去安慰一下你的同桌（女生），不要让她很愧疚。这件事让我收获还蛮多，这可能也是让我对于印家厚的一些欣赏，那就是他的隐忍，面对生活压力的态度，真的还让我蛮欣赏的。</p><p><em><strong>这</strong></em>  部小说中有句话是，委屈最怕的是别人不知道你的委屈。而敢于忍受、承担这种委屈，是需要什么样的心灵才得以承受，这是我不太敢想象的。而这也应该是我比较欣赏印家厚的原因吧。</p><p><em><strong>生</strong></em>  活亦或如此，愿这世能善待每个人。</p><hr><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活调料 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活 </tag>
+            
+            <tag> 读书感想 </tag>
+            
+            <tag> 《烦恼人生》 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>眨眼过了四月天</title>
+      <link href="posts/%E7%9C%A8%E7%9C%BC%E8%BF%87%E4%BA%86%E5%9B%9B%E6%9C%88%E5%A4%A9/"/>
+      <url>posts/%E7%9C%A8%E7%9C%BC%E8%BF%87%E4%BA%86%E5%9B%9B%E6%9C%88%E5%A4%A9/</url>
+      
+        <content type="html"><![CDATA[<p><em><strong>我</strong></em>  是在西安进入四月的，翻山越岭。最给我回忆的是交大的树木，不知道是什么品种，但能够感觉到久远的历史，高大挺拔，直直地向上。西安的小吃都没什么印象了，一想起来，便是清真餐厅和回民街，但倒不太合我胃口，也就没有太好的体验。西安的重逢，静谧而短暂，每天都是麻木的脚，而第二天还能兴致勃勃再走一遭。就像西安的太阳，耀眼，和北京很像。感觉北京清晨的太阳更加让人睁不开眼，而四川的天就感觉比较高，来得更加温和。跟她去了越来越多的城市，想要收获着什么，又好像收获了什么，但又无法陈述，我倾向归咎于成长。逐渐开始思考何为大城市、社会又怎样地在运转，这都不是我太能想明白的事。</p><p><em><strong>我</strong></em>  好像始终在寻找着什么，这很难说，但我知道我渴望着一个答案。我也知道是什么，无非是年少有为。就像以前认为害怕别人成功而自己一无是处，渐渐发现，我们走在了不同的路上，而且仍在不断地走下去，至于前方有什么都无从知道。我认为我应该走在了正确的路上，但又害怕着，就如别人也认为自己的路才是正确的。我看别人是傻逼，就像别人看我是傻逼一样。我开始明白这就是人生，我开始思考什么是正确，开始思考我到底想要得到什么。</p><p><em><strong>在</strong></em>  去西安的高铁上很有意思，遇到一个中年的教育工作者，或许因为我是大学生的身份，或许看我面善，一起聊了很多以后考研的事。也让我感到紧迫、压力。也让我着眼看看世界，也让我想了想外国的学校，我开始明白英语成为我很大的一个障碍，渐渐明白，在这个游戏规则下，数学与英语能够决定未来很多的路。突然警觉，时间过得很快，恍惚2019进5月了，我已经事一名大二学子，再有一年，我该面临的便是考研、工作、出国。原来人生其实很无聊，但人类很有趣，</p><p><em><strong>本</strong></em>  来想写些什么的，因为感觉自己这段时间还是有些许收获，但一安静，但不知道该写些什么了，那就这样吧。最后在回忆一下曾经把，因为最近得知弟弟早恋了，让我想到了自己，也证明了我早恋是必然的结果。这于我们的家庭教育相关，我们没能有太宽阔的眼见，去看到世界更大的舞台，在青春最疯狂美好的年华，没有那么大的激情去就追求梦想，因为确实没有宽宏的梦想。这也让我了解到当年家长与老师他们的心情，担心又不情愿的感觉。不过真有意思，希望有天他能够我跟他说的那番话。</p><p>期待2019的暑假，但愿不要有一次的失望，希望能到南京走一遭。</p><hr><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活调料 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活 </tag>
+            
+            <tag> 旅游 </tag>
+            
+            <tag> 西安 </tag>
+            
+            <tag> 四月 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ubuntu 常用指令</title>
+      <link href="posts/Ubuntu%E6%8C%87%E4%BB%A4/"/>
+      <url>posts/Ubuntu%E6%8C%87%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在Ubuntu系统下搭了一个游戏服务器，简单总结一下一些基本指令</p><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><ul><li><p><code>mkdir</code> 指令</p><p>建立一个文件夹</p><p><code>mkdir root</code></p><p>即在当前路径下建立root文件夹</p></li><li><p><code>cd</code> 指令</p><p>进入文件夹 </p><p><code>cd root</code> </p><p>在当前路径下进入root文件夹；当然也可以使用绝对路径</p></li><li><p><code>wget</code>指令</p><p><code>wget http://xxxxxxx.xx</code></p><p>从http地址下载文件，详细自查百度</p></li><li><p><code>touch</code>指令</p><p><code>touch xxx.sh</code></p><p>建立文件指令；上述指令建立一个脚本</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Ubuntu </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> 指令 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>求生之路开服过程（基于ubuntu）</title>
+      <link href="posts/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D/"/>
+      <url>posts/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF%E5%BC%80%E6%9C%8D/</url>
+      
+        <content type="html"><![CDATA[<p>腾讯云、华为云应测<br>配置：</p><ul><li>CPU 1核</li><li>内存 2GB</li><li>带宽 1M</li><li>硬盘 40g</li><li>系统 ubuntu 16.04 64位</li></ul><h3 id="服务器安装流程"><a href="#服务器安装流程" class="headerlink" title="服务器安装流程"></a>服务器安装流程</h3><h4 id="安装32位环境"><a href="#安装32位环境" class="headerlink" title="安装32位环境"></a>安装32位环境</h4><p><strong>64位系统需要安装32位环境</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install lib32gcc1</span><br></pre></td></tr></table></figure><h4 id="安装steamcmd"><a href="#安装steamcmd" class="headerlink" title="安装steamcmd"></a>安装steamcmd</h4><p><strong>通过steamcmd安装 l4d2 服务器框架</strong></p><ul><li>创建存储目录 -&gt; mkdir 指令<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/steamcmd</span><br></pre></td></tr></table></figure></li><li>进入目录 -&gt; cd 指令<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/steamcmd</span><br></pre></td></tr></table></figure></li><li>下载 steamcmd包<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure></li><li>解压<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure></li><li>打开steam<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./steamcmd.sh</span><br></pre></td></tr></table></figure>这时启动成功会出现：<br><code>Steam&gt;</code></li></ul><h4 id="L4D2-服务器框架"><a href="#L4D2-服务器框架" class="headerlink" title="L4D2 服务器框架"></a>L4D2 服务器框架</h4><ul><li><p>匿名登录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;login anonymous</span><br></pre></td></tr></table></figure></li><li><p>指定下载目录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;force_install_dir /root/l4d2</span><br></pre></td></tr></table></figure><p>这是我华为云下设置的目录，自己根据自己情况而定</p></li><li><p>下载服务端</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;app_update 222860 validate</span><br></pre></td></tr></table></figure><p>若以后服务器提示更新，也是这条语句更新</p></li><li><p>下载成功<br>下载成功会提示这条语句<br><code>Success! App &#39;222860&#39; fully installed.</code><br>然后退出steamcmd</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Steam&gt;quit</span><br></pre></td></tr></table></figure></li></ul><h4 id="配置L4D2服务器"><a href="#配置L4D2服务器" class="headerlink" title="配置L4D2服务器"></a>配置L4D2服务器</h4><ul><li>新建配置文件<br>进入目录：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /root/l4d2/left4dead2/cfg/</span><br></pre></td></tr></table></figure>创建配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi server.cfg</span><br></pre></td></tr></table></figure></li><li>填写配置内容<br>最最最简洁版：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostname &quot;xxx&quot;     //游戏服务器名</span><br><span class="line">sv_steamgroup &quot;xxx&quot;  //Steam组号</span><br><span class="line">sv_steamgroup_exclusive 1 //将服务器设为Steam组私有</span><br></pre></td></tr></table></figure></li><li>服务器标题栏<br>于<code>l4d2/left4dead2/host.txt</code>中,可填文字和网址</li><li>服务器公告栏<br>于<code>l4d2/left4dead2/motd.txt</code>中，推荐放入网址</li></ul><h4 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/l4d2</span><br><span class="line">./srcds_run -game left4dead2 +exec server.cfg</span><br></pre></td></tr></table></figure><p>默认端口为27015，需要服务器开放此端口，也可自己设置为其它端口<br>这样启动，在ssh窗口关闭后，服务器就关闭了，我们需要借助screen 后台运行</p><ul><li>创建一个脚本<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch start.sh</span><br></pre></td></tr></table></figure></li><li>打开脚本<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi start,sh</span><br></pre></td></tr></table></figure></li><li>填入启动指令<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen ./srcds_run -game left4dead2 +exec server.cfg +map xxx</span><br></pre></td></tr></table></figure></li><li>赋予脚本执行权力<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/root/l4d2/start.sh</span><br></pre></td></tr></table></figure></li></ul><p>就可以启动服务器了<br><code>./start.sh</code>就会打开screen面板启动服务器</p><ul><li>切出面板 Ctrl+A Ctrl+D（服务器不会关闭，在后台运行）</li><li>切回面板 <code>screen -r</code></li><li>关闭服务器 Ctrl+C</li></ul><p><strong>切换地图，使用第三方地图</strong></p><ul><li>把第三方地图放在<code>l4d2/left4dead2/addons</code>文件夹下</li><li>修改启动指令 <code>... +map xxx</code></li><li>重新启动</li></ul><hr><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Ubuntu </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> 求生之路2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2018，再见！</title>
+      <link href="posts/2018%EF%BC%8C%E5%86%8D%E8%A7%81%EF%BC%81/"/>
+      <url>posts/2018%EF%BC%8C%E5%86%8D%E8%A7%81%EF%BC%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2018，再见！"><a href="#2018，再见！" class="headerlink" title="2018，再见！"></a>2018，再见！</h1><p>再次踏上Z95次列车，但是心情好像没有去年这时来得兴奋、洒脱，好像有种东西压抑着自己。目前暂且归咎于成长。逐渐长大也就意味着自己要承担得更多，而眼看着过完年就是20岁的自己，似乎依旧一无所有。没有钱、没有工作、甚至也不知道自己是否已经拥有得到工作赚钱养活自己的能力，这都令人担忧。</p><p>曾经无聊时听过一段FM，大概也是讨论20岁的自己是个什么模样，而我给我感触最深也让我觉得十分恰当的便是一无所有。甚至这有时候也成为我畏手畏脚的借口，因为害怕失败，所以不敢轻易冒险。不得不说我倒是非常厌恶这样，甚至曾经几度让我迷失方向，看着别人奔跑的方向，而自己知道那并不是自己想到达的地方，但又害怕着因此输给别人，徘徊和迷茫着该怎么做。</p><p>不得不说2018困扰我最大的问题便是我到底想要什么，我到底要成为怎样的人，我到底该怎么做。这些问题并不是从年头或者某一天突然地意识觉醒然后开始想这些，而是在这一年里，发现自己有时候的努力变成了泡沫渐渐产生这些问题。</p><hr><hr><p>这一年的上半年是在通州度过的，目前在我的回忆里是个相对安静、简单、悠闲的地方，也是从这个学期开始，逐渐游戏变得不重要，也是从这个学期开始慢慢喜欢上读书，因为某个男人，可以说深深影响了我。而整个学期，给我留下的便是 按时起床、听课、准时固定的自习、按时看书、按时睡觉，还有时不时给自己写写计划表，写写总结。最后也有不错的成绩，但是英语始终没有提升，四级也没过。但总体给自己感觉就是不错，看到积极努力的自己，很满足。</p><p>而进暑假，原本计划的学习、做项目，在莫名的燥热下，什么都没做。便是每天偷懒，躺床。然后莫莫不舍地上火车，不知为何这次格外不舍。这也和现在在寒假状态差不多，躺床、偷懒。</p><p>下半年，到了朝阳，见识到很多有趣的事情，也学到很多东西。参加学习外更多的活动，认识了一些学长学姐，也看到别人如何努力。简单一点，下半年在这边之后，不再在一个寂静简单的环境独自学习。也认识到其实自己并没有那么努力，同样还有着许多人比我更加优秀，而且逐渐发现自己在学习以外的很多方面都还需要锻炼。</p><p>在下半年的学习中，显得浮躁，不再那么认认真真地上课，每天按时完成作业。因为一些事让自己有时候变得有些浮躁、焦虑，静不下心坚持每天勤奋地学习。但奇怪地是，这学期的考试成绩比大一都要来得更好，我想主要是因为没有大学英语了吧。英语目前依然是我很大的一个问题，困扰了这么多年，给自己2019定个目标是解决英语的问题。最后期末考试也显得有些狼狈，不得不说，这个学期做得并不算是特别好。</p><p>除此之外呢，这个学期多了学生工作，在中心担任干事，也经历了大大小小很多活动，确实也消耗了自己很多时间，同时也让我学习到很多对自己也有更多地认识。同时通过工作，发现很多能力的锻炼并不是嘴巴说一样那么简单，真的需要看着别人的为人处事，会学到一些难以表达的东西。</p><p>这个学期还有一条生活线是在听鲜团队，从小程序转战到CMS，开始学js一步步扩展网页功能，确实是一件很有意义的东西。但也曾麻痹自己一段时间，认为这是一件很厉害的事，但其实不然，这真的是很基础的东西，可以用入门来形容。也就只是到了入门级别的程度。但在这个过程中，确实学到了很多东西，做了一些比较有意义地事情。</p><p>这一年，看到有些人是如何努力，有些人是如何做舔狗的，有些人是如何选择自己的路。大学我还比较迷茫，不像高中那样所有人的前面就只有高考。每个人都有自己的方向，而在2018也困惑我的问题是，我该选择哪个方向。有时候害怕失败，从而想都全部抓，最后只有落得狼狈不堪，比如这学期参加了很多比赛，但是自己其实并没有做好充足的准备，浪费了时间，最后一无所获。</p><hr><hr><p>2018还是结束了，2019也开始了，这一年里我就快20岁了。这个对我意义非凡但又一无所有的年纪，我知道这并不会给我什么痕迹，只是逐渐看到长大的自己，心里面有一种无法描绘的情绪，没有喜悦、没有伤感，只是知道自己责任会越来越大。</p><p>2019希望这一年自己能有更多收获，希望自己长胖一点。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活调料 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活 </tag>
+            
+            <tag> 过年 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于使用ajax()的一些小总结</title>
+      <link href="posts/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8ajax-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%80%BB%E7%BB%93/"/>
+      <url>posts/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8ajax-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>ajax() 通过HTTP请求加载远程数据。</p><p>笔者近期是用于网页通过访问API与后台数据库进行数据交流。在对最近用到的做一点小总结，不过冰山一角而已。</p><p>语法：$.ajax([settings])  [settings] 配置Ajax请求的键值对集合。</p><p>例：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">                <span class="attr">type</span>:<span class="string">&#x27;POST&#x27;</span>,         <span class="comment">//以post方法访问</span></span><br><span class="line">                <span class="attr">url</span>:<span class="string">&#x27;http:\\yoururl&#x27;</span>,   <span class="comment">//API地址</span></span><br><span class="line">                <span class="attr">data</span>: data             <span class="comment">//上传的数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>关于[settings]中的参数详细请见<a href="http://www.w3school.com.cn/jquery/ajax_ajax.asp" title="ajax方法">ajax方法</a></p><h2 id="以form-data形式上传数据"><a href="#以form-data形式上传数据" class="headerlink" title="以form-data形式上传数据"></a>以form-data形式上传数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`function upload(one,two)&#123;</span></span><br><span class="line"><span class="string">    var data = new FormData();    // 创建一个form-data对象</span></span><br><span class="line"><span class="string">    data.append(&#x27;one&#x27;, one);      //添加要上传的数据</span></span><br><span class="line"><span class="string">    data.append(&#x27;two&#x27;, two);</span></span><br><span class="line"><span class="string">    $.ajax(&#123;</span></span><br><span class="line"><span class="string">        type:&#x27;POST&#x27;,</span></span><br><span class="line"><span class="string">        url:&#x27;http:\\yoururl&#x27;,</span></span><br><span class="line"><span class="string">        data: data</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string">&#125;`</span></span><br></pre></td></tr></table></figure><p>值得注意的是：用append()进行添加数据<br>第一个参数，引号内容应该是对应访问API的参数名。<br>第二个参数是要上传的数据</p><h2 id="上传文件（图片及其它文件）"><a href="#上传文件（图片及其它文件）" class="headerlink" title="上传文件（图片及其它文件）"></a>上传文件（图片及其它文件）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = <span class="keyword">new</span> FormData();    <span class="comment">// 创建一个form-data对象</span></span><br><span class="line">    data.append(<span class="string">&#x27;file&#x27;</span>, file);      <span class="comment">//添加要上传的文件</span></span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>:<span class="string">&#x27;http:\\yoururl&#x27;</span>,</span><br><span class="line">        <span class="attr">data</span>: data,</span><br><span class="line">        <span class="attr">processData</span>: <span class="literal">false</span>,         <span class="comment">//设置对上传的文件不进行字符串序列化</span></span><br><span class="line">        <span class="attr">async</span>: <span class="literal">false</span>,               <span class="comment">//设置同步方式访问</span></span><br><span class="line">        <span class="attr">contentType</span>: <span class="literal">false</span>,         <span class="comment">//防止JQ对上传的文件操作</span></span><br><span class="line">&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上传文件与上传普通的数据差不多，大都可以用form-data的形式上传，只不过传入的数据要求是 flie类型或者blob类型</p><p>同时还有一些必要的参数<br>async设置为同步一般上传文件时为了防止出错会让网页等待上传完成，或者还有一种情况就是，上传图片然后再显示出来，这也需要设置为同步方式上传。<br>processData 设置对上传的文件不进行字符串序列化，默认会将data上传的数据处理转化为一个查询字符串。<br>contentType 防止jQuery对数据有所修改。</p><h2 id="以x-www-form-urlencoded形式上传数据"><a href="#以x-www-form-urlencoded形式上传数据" class="headerlink" title="以x-www-form-urlencoded形式上传数据"></a>以x-www-form-urlencoded形式上传数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">one,two</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = &#123;</span><br><span class="line">                <span class="string">&#x27;one&#x27;</span>:one,</span><br><span class="line">                <span class="string">&#x27;two&#x27;</span>:two,</span><br><span class="line">                &#125;;    <span class="comment">// 以json形式传递参数</span></span><br><span class="line"> </span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>:<span class="string">&#x27;http:\\yoururl&#x27;</span>,</span><br><span class="line">        <span class="attr">data</span>: data</span><br><span class="line">&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这应该是最常见的 POST 提交数据的方式了，浏览器的原生 form 表单。<br>默认情况下，都是以这种方式传递数据，但是不能传递文件。</p><h2 id="接收返回值"><a href="#接收返回值" class="headerlink" title="接收返回值"></a>接收返回值</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">one,two</span>)</span>&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>:<span class="string">&#x27;http:\\yoururl&#x27;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> filedata = <span class="built_in">eval</span>(<span class="string">&quot;(&quot;</span> + data + <span class="string">&quot;)&quot;</span>);</span><br><span class="line">            <span class="comment">//用json对象来接收返回值然后运用。</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                   </span><br><span class="line">        &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>一般返回值是一个json，但没办法直接用，可以通过eval()转化为一个json对象，然后就可以调用其数据。当然也有其它很多方式。</p><h2 id="在请求的Header里面传递参数"><a href="#在请求的Header里面传递参数" class="headerlink" title="在请求的Header里面传递参数"></a>在请求的Header里面传递参数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">one,two</span>)</span>&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        <span class="attr">url</span>:<span class="string">&#x27;http:\\yoururl&#x27;</span>,</span><br><span class="line">        <span class="attr">beforeSend</span>: <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;</span><br><span class="line">            request.setRequestHeader(<span class="string">&#x27;name&#x27;</span>,value);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                   </span><br><span class="line">        &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在应用中，可能会需要在Header里面传入参数的情况，例如Ba认证等等。<br>则在beforeSend里面调用setReuqestHeader()函数传入参数。<br>name：参数名；value：传入的数据。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是就是笔者刚开始学习做网页，如何与后台数据进行连接的一些方法。大体上，与API对接最基础的都能够实现。Ajax还有更深的东西，这不过是最基础的东西，笔者仅以记录自己一步一步学习的过程。努力!</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Javasript学习点滴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 前端 </tag>
+            
+            <tag> JQuery </tag>
+            
+            <tag> ajax </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于Cookie的一些基本使用方法</title>
+      <link href="posts/%E5%85%B3%E4%BA%8ECookie%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+      <url>posts/%E5%85%B3%E4%BA%8ECookie%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><p>一段信息通过网页放在本地上，一般网站用于储存数据、识别用户的东西。其实简单点，就是以 “key=value” 这样的形式将数据存储在一个cookie文件中。相当于各个网页之间都能使用的全局变量。</p><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="创建cookie"><a href="#创建cookie" class="headerlink" title="创建cookie"></a>创建cookie</h3><p>        doucument.cookie =  “username = Tony”;  //这样cookie便建立好了，里面有一个username的变量，值是Tony</p><h3 id="设置cookie过期时间"><a href="#设置cookie过期时间" class="headerlink" title="设置cookie过期时间"></a>设置cookie过期时间</h3><p>        document.cookie = “expires = Thu, 25 Dec 2040 12:00:00 GMT”;  //设置expires添加过期时间（UTC或GMT时间）。如果没有设置，默认是关闭浏览器时删除cookie。</p><h3 id="设置cookie的路径"><a href="#设置cookie的路径" class="headerlink" title="设置cookie的路径"></a>设置cookie的路径</h3><p>        document.cookie = “path=C:&quot;;  //用path参数设置cookie文件所在位置。默认是属于当前页面。</p><h3 id="读取cookie"><a href="#读取cookie" class="headerlink" title="读取cookie"></a>读取cookie</h3><p>        var a = document.cookie;  //以字符串的形式赋给a变量，类似于a=“key1=value1;key2=value2;……”</p><h3 id="修改cookie"><a href="#修改cookie" class="headerlink" title="修改cookie"></a>修改cookie</h3><p>        document.cookie = “username = peter”;  //类似于创建，添加新的参数也是如此。</p><h3 id="删除cookie"><a href="#删除cookie" class="headerlink" title="删除cookie"></a>删除cookie</h3><p>        document.cookie = “expires = Thu 04 May 1919 00:00:00 GMT”;  //将过期时间设置为过去时间即可。</p><h6 id="Cookie信息是以-名-值-形式存在的。而且对于创建、添加、修改都是一样的，即document-cookie-“…”都是往cookie添加或修改东西，而不会把旧的cookie覆盖，只是不断往里面增加东西。"><a href="#Cookie信息是以-名-值-形式存在的。而且对于创建、添加、修改都是一样的，即document-cookie-“…”都是往cookie添加或修改东西，而不会把旧的cookie覆盖，只是不断往里面增加东西。" class="headerlink" title="Cookie信息是以 名/值 形式存在的。而且对于创建、添加、修改都是一样的，即document.cookie = “…”都是往cookie添加或修改东西，而不会把旧的cookie覆盖，只是不断往里面增加东西。"></a>Cookie信息是以 名/值 形式存在的。而且对于创建、添加、修改都是一样的，即document.cookie = “…”都是往cookie添加或修改东西，而不会把旧的cookie覆盖，只是不断往里面增加东西。</h6><h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="创建cookie函数（添加）"><a href="#创建cookie函数（添加）" class="headerlink" title="创建cookie函数（添加）"></a>创建cookie函数（添加）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name,value,days</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.cookie=name+<span class="string">&#x27;=&#x27;</span>+value;</span><br><span class="line">    <span class="keyword">if</span>(days)                                            <span class="comment">//判断是否增加过期时间</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> oDate=<span class="keyword">new</span> <span class="built_in">Date</span>();                           <span class="comment">//getDate() 获取日期的日号</span></span><br><span class="line">        oDate.setDate(oDate.getDate()+days);</span><br><span class="line">        <span class="built_in">document</span>.cookie=<span class="string">&#x27;expires=&#x27;</span>+oDate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="获取cookie值函数"><a href="#获取cookie值函数" class="headerlink" title="获取cookie值函数"></a>获取cookie值函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">cname</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = cname + <span class="string">&quot;=&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> ca = <span class="built_in">document</span>.cookie.split(<span class="string">&#x27;;&#x27;</span>);                   <span class="comment">//split()将字符串分割成字符串数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;ca.length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> c = ca[i].trim();                              <span class="comment">//trim() 删除字符串首尾的空格</span></span><br><span class="line">        <span class="keyword">if</span> (c.indexOf(name)==<span class="number">0</span>) <span class="keyword">return</span> c.substring(name.length,c.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Javasript学习点滴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> Cookie </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>站立着的心</title>
+      <link href="posts/%E7%AB%99%E7%AB%8B%E7%9D%80%E7%9A%84%E5%BF%83/"/>
+      <url>posts/%E7%AB%99%E7%AB%8B%E7%9D%80%E7%9A%84%E5%BF%83/</url>
+      
+        <content type="html"><![CDATA[<p>没有任何乞求，只为一心只为更好学习。</p><p>作为正在学计算机的学生，看到前辈的大学生涯能够做那么多有意义的事，看到一个又一个的故事。我知道那是我所渴望走的路，于是我想跟随他们脚印往前走走。于是有了这一篇文章，而且还有会更多的文章。</p><p>若不在乎内容是否网上遍地都是，不在乎内容是否低级幼稚，只为更好做好自己的学习。</p><p>学习一年了，特别近半个学期以来，大学生活忙得要死。感觉每天都很忙，给我一种虚假的充实。大多都是恍惚而过。以为自己正在飞速进步，其实并非如此。于专业知识并没有更深入，更细致。这似乎于我最初的方向有点背道相驰。</p><p>近日学到两个词语。研究性学习与产出性学习。</p><h3 id="研究性学习"><a href="#研究性学习" class="headerlink" title="研究性学习"></a>研究性学习</h3><p>其实很好理解，纯粹，简单，为学习而学习，没有杂念。这曾是我所佩服的一类人。于自己兴趣执着深入研究。我曾有个高中同学，对理论物理有着执着的感情，经常拉着我讨论一些奇妙的现象和理论。还是在最紧张的备战高考，他也说他想研究理论物理，相信大家都知道于如今，理论物理并非火热专业，而能够真正追求自己所喜欢的这份执着真的很令我敬佩。所以我对大学的学习应该更多是这种状态，为学习而学习，而不是交付任务。</p><h3 id="产出性学习"><a href="#产出性学习" class="headerlink" title="产出性学习"></a>产出性学习</h3><p>我认为我目前状态就是这样的状态，目前为了做项目，就为了做出一个模块或者某个功能，就搜索解决办法。给自己虚假的成就感，实际自己并没有熟练掌握，想想都觉得不过是被自己麻痹了。其实并没有想象中的那么努力，这或许也是我为什么着急得去改变吧。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活调料 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活 </tag>
+            
+            <tag> 思考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
